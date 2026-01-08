@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
+import { useWishlist } from '../context/WishlistContext'
 import CartDrawer from './CartDrawer'
 import LoginModal from './LoginModal'
 
@@ -18,6 +19,7 @@ export default function Header() {
   const { itemCount, setIsCartOpen } = useCart()
   const { user, logout } = useAuth()
   const { isDark, toggleTheme } = useTheme()
+  const { wishlistCount } = useWishlist()
   const navigate = useNavigate()
   const searchInputRef = useRef(null)
 
@@ -168,6 +170,22 @@ export default function Header() {
                 </svg>
               </button>
 
+              {/* Wishlist Icon with Badge */}
+              <Link
+                to="/wishlist"
+                className="relative hidden md:flex w-10 h-10 rounded-full bg-secondary/20 border-2 border-foreground items-center justify-center hover:animate-wiggle shadow-hard-sm transition-all focus:outline-none focus:ring-2 focus:ring-ring"
+                title="My Wishlist"
+              >
+                <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs font-heading font-extrabold rounded-full w-6 h-6 flex items-center justify-center border-2 border-foreground shadow-hard-sm">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+
               {/* Cart Icon with Badge */}
               <button
                 onClick={() => setIsCartOpen(true)}
@@ -289,6 +307,16 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Support
+              </Link>
+              <Link
+                to="/wishlist"
+                className="block text-gray-700 hover:text-primary font-medium py-2 flex items-center gap-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
               </Link>
               {user ? (
                 <>

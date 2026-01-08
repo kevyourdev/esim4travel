@@ -15,14 +15,17 @@ import TermsPage from './pages/TermsPage'
 import PrivacyPage from './pages/PrivacyPage'
 import RefundPolicyPage from './pages/RefundPolicyPage'
 import AboutPage from './pages/AboutPage'
+import WishlistPage from './pages/WishlistPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { WishlistProvider } from './context/WishlistContext'
 
 function App() {
   return (
     <ThemeProvider>
+    <WishlistProvider>
     <AuthProvider>
       <CartProvider>
         <Router>
@@ -44,6 +47,7 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/refund" element={<RefundPolicyPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/wishlist" element={<WishlistPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
@@ -52,6 +56,7 @@ function App() {
         </Router>
       </CartProvider>
     </AuthProvider>
+    </WishlistProvider>
     </ThemeProvider>
   )
 }

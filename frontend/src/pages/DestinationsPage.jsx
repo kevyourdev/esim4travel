@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { useWishlist } from '../context/WishlistContext'
 
 export default function DestinationsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [destinations, setDestinations] = useState([])
+  const { isInWishlist, toggleWishlist } = useWishlist()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -248,52 +250,73 @@ export default function DestinationsPage() {
               {filteredDestinations.map(destination => {
                 // Popular destinations get pink hard shadow
                 const isPopular = !!destination.is_popular;
+                const inWishlist = isInWishlist(destination.id);
                 return (
-                <Link
+                <div
                   key={destination.id}
-                  to={`/destinations/${destination.slug}`}
-                  className={`bg-card rounded-xl border-2 border-foreground ${isPopular ? 'shadow-hard-secondary' : 'shadow-hard'} hover:-rotate-1 hover:scale-102 transition-all duration-300 ease-bouncy overflow-hidden group`}
+                  className={`bg-card rounded-xl border-2 border-foreground ${isPopular ? 'shadow-hard-secondary' : 'shadow-hard'} hover:-rotate-1 hover:scale-102 transition-all duration-300 ease-bouncy overflow-hidden group relative`}
                 >
-                  {/* Flag/Image Section */}
-                  <div className="bg-gradient-to-br from-accent to-secondary h-40 flex items-center justify-center relative">
-                    <span className="text-7xl group-hover:animate-wiggle transition-transform">{destination.flag_emoji}</span>
-                    {/* Popular star badge */}
-                    {isPopular && (
-                      <div className="absolute -top-3 -right-3 w-12 h-12 bg-tertiary rounded-full border-2 border-foreground flex items-center justify-center shadow-hard">
-                        <svg className="w-6 h-6 text-foreground" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                        </svg>
+                  {/* Wishlist Button */}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleWishlist(destination);
+                    }}
+                    className={`absolute top-3 left-3 z-10 w-10 h-10 rounded-full border-2 border-foreground flex items-center justify-center shadow-hard-sm transition-all duration-300 hover:scale-110 ${
+                      inWishlist
+                        ? 'bg-secondary text-white'
+                        : 'bg-white/90 text-secondary hover:bg-secondary hover:text-white'
+                    }`}
+                    title={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+                  >
+                    <svg className="w-5 h-5" fill={inWishlist ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+
+                  <Link to={`/destinations/${destination.slug}`}>
+                    {/* Flag/Image Section */}
+                    <div className="bg-gradient-to-br from-accent to-secondary h-40 flex items-center justify-center relative">
+                      <span className="text-7xl group-hover:animate-wiggle transition-transform">{destination.flag_emoji}</span>
+                      {/* Popular star badge */}
+                      {isPopular && (
+                        <div className="absolute -top-3 -right-3 w-12 h-12 bg-tertiary rounded-full border-2 border-foreground flex items-center justify-center shadow-hard">
+                          <svg className="w-6 h-6 text-foreground" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-heading font-bold text-foreground mb-2">{destination.name}</h3>
+
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <span className="text-sm text-mutedForeground">From </span>
+                          <span className="text-xl font-heading font-extrabold text-accent">
+                            ${destination.min_price ? destination.min_price.toFixed(2) : '4.99'}
+                          </span>
+                        </div>
+
+                        {/* Coverage Quality */}
+                        <div className="flex gap-1">
+                          {[...Array(destination.coverage_quality || 5)].map((_, i) => (
+                            <div key={i} className="w-3 h-3 bg-quaternary rounded-sm"></div>
+                          ))}
+                        </div>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Content Section */}
-                  <div className="p-4">
-                    <h3 className="text-lg font-heading font-bold text-foreground mb-2">{destination.name}</h3>
-
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <span className="text-sm text-mutedForeground">From </span>
-                        <span className="text-xl font-heading font-extrabold text-accent">
-                          ${destination.min_price ? destination.min_price.toFixed(2) : '4.99'}
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-mutedForeground font-medium">
+                          {destination.package_count || '5'} plans available
                         </span>
                       </div>
-
-                      {/* Coverage Quality */}
-                      <div className="flex gap-1">
-                        {[...Array(destination.coverage_quality || 5)].map((_, i) => (
-                          <div key={i} className="w-3 h-3 bg-quaternary rounded-sm"></div>
-                        ))}
-                      </div>
                     </div>
-
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-mutedForeground font-medium">
-                        {destination.package_count || '5'} plans available
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
                 );
               })}
             </div>
