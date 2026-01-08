@@ -88,6 +88,100 @@ function MyOrdersPage() {
     }
   };
 
+  const downloadReceipt = (order) => {
+    const receiptHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Receipt - Order #${order.id}</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; }
+          .header { text-align: center; border-bottom: 2px solid #0D9488; padding-bottom: 20px; margin-bottom: 30px; }
+          .logo { font-size: 28px; font-weight: bold; color: #0D9488; }
+          .order-info { background: #F0FDFA; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+          .order-info h2 { margin: 0 0 10px 0; color: #134E4A; }
+          .order-info p { margin: 5px 0; color: #374151; }
+          table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+          th, td { padding: 12px; text-align: left; border-bottom: 1px solid #E5E7EB; }
+          th { background: #F9FAFB; font-weight: 600; color: #374151; }
+          .total-row { font-weight: bold; font-size: 18px; }
+          .total-row td { border-top: 2px solid #0D9488; padding-top: 15px; }
+          .footer { text-align: center; color: #6B7280; font-size: 14px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB; }
+          .status { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+          .status-completed { background: #D1FAE5; color: #065F46; }
+          .status-pending { background: #FEF3C7; color: #92400E; }
+          @media print { body { padding: 20px; } }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div class="logo">eSIM4Travel</div>
+          <p style="color: #6B7280; margin-top: 5px;">Travel eSIM Data Plans</p>
+        </div>
+
+        <div class="order-info">
+          <h2>Order Receipt</h2>
+          <p><strong>Order Number:</strong> #${order.id}</p>
+          <p><strong>Date:</strong> ${formatDate(order.created_at)}</p>
+          <p><strong>Email:</strong> ${order.email}</p>
+          <p><strong>Status:</strong> <span class="status status-${order.status}">${order.status.toUpperCase()}</span></p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Package</th>
+              <th>Qty</th>
+              <th style="text-align: right;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${order.items.map(item => `
+              <tr>
+                <td>${item.destination_name}</td>
+                <td>${item.package_name}</td>
+                <td>${item.quantity}</td>
+                <td style="text-align: right;">$${item.total_price.toFixed(2)}</td>
+              </tr>
+            `).join('')}
+            <tr>
+              <td colspan="3"><strong>Subtotal</strong></td>
+              <td style="text-align: right;">$${order.subtotal.toFixed(2)}</td>
+            </tr>
+            ${order.discount > 0 ? `
+              <tr style="color: #059669;">
+                <td colspan="3">Discount</td>
+                <td style="text-align: right;">-$${order.discount.toFixed(2)}</td>
+              </tr>
+            ` : ''}
+            <tr class="total-row">
+              <td colspan="3">Total</td>
+              <td style="text-align: right; color: #0D9488;">$${order.total.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer">
+          <p>Thank you for choosing eSIM4Travel!</p>
+          <p>For support, visit: support@esim4travel.com</p>
+          <p style="margin-top: 15px; font-size: 12px;">This receipt was generated on ${new Date().toLocaleString()}</p>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // Create a new window and print/save
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(receiptHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    // Give it a moment to render, then trigger print dialog
+    setTimeout(() => {
+      printWindow.print();
+    }, 250);
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -237,17 +331,29 @@ function MyOrdersPage() {
                       </div>
                     </div>
 
-                    {/* QR Code Button */}
-                    {orderDetails.status === 'completed' && (
-                      <div className="mt-6">
+                    {/* Action Buttons */}
+                    <div className="mt-6 space-y-3">
+                      {/* Download Receipt Button */}
+                      <button
+                        onClick={() => downloadReceipt(orderDetails)}
+                        className="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Download Receipt
+                      </button>
+
+                      {/* QR Code Button */}
+                      {orderDetails.status === 'completed' && (
                         <button
                           onClick={() => fetchQRCodes(orderDetails.id)}
                           className="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition"
                         >
                           View QR Code
                         </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               ) : (
