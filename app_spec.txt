@@ -183,6 +183,199 @@
     </responsive_navigation>
   </core_features>
 
+  <implemented_features>
+    <dark_mode>
+      - Theme toggle button in header (sun/moon icons)
+      - System preference detection on first visit
+      - localStorage persistence of user preference
+      - Tailwind darkMode: 'class' configuration
+      - Dark variants for all UI components
+      - Context: ThemeContext.jsx with useTheme hook
+    </dark_mode>
+
+    <wishlist_favorites>
+      - Heart icon buttons on destination cards
+      - Dedicated /wishlist page to view saved items
+      - Badge count in header navigation
+      - localStorage persistence across sessions
+      - Add/remove/toggle/clear functionality
+      - Context: WishlistContext.jsx with useWishlist hook
+    </wishlist_favorites>
+
+    <recently_viewed>
+      - Automatic tracking when viewing destination details
+      - "Recently Viewed" section on homepage
+      - Maximum 8 items stored (FIFO)
+      - localStorage persistence
+      - Clear history button
+      - Context: RecentlyViewedContext.jsx with useRecentlyViewed hook
+    </recently_viewed>
+
+    <device_compatibility_checker>
+      - Modal component accessible from header
+      - Auto-detection of device from user agent
+      - Brand selection (Apple, Samsung, Google, etc.)
+      - Device model selection with eSIM support status
+      - Comprehensive device database
+      - Setup tips for compatible devices
+      - Component: DeviceCompatibilityChecker.jsx
+    </device_compatibility_checker>
+
+    <download_receipt>
+      - Button on order details page
+      - Generates printable HTML receipt
+      - Professional styling with company branding
+      - Opens browser print dialog for PDF save
+      - Includes order items, totals, QR code reference
+    </download_receipt>
+
+    <password_reset_flow>
+      - Forgot password link on login page
+      - Email input for reset request
+      - Mock email sent confirmation
+      - Reset token validation (mock)
+      - New password form with confirmation
+    </password_reset_flow>
+
+    <real_qr_codes>
+      - QR codes generated using qrcode library
+      - Unique activation codes per order item
+      - Displayed on order confirmation and My Orders
+      - Re-downloadable from order history
+    </real_qr_codes>
+
+    <testimonials_carousel>
+      - Auto-advancing carousel on homepage
+      - Customer reviews with ratings
+      - Navigation dots and arrows
+      - Smooth CSS transitions
+    </testimonials_carousel>
+  </implemented_features>
+
+  <planned_features>
+    <high_priority>
+      <multi_currency>
+        - Currency selector in header/footer
+        - Support for USD, EUR, GBP, JPY, AUD
+        - Real-time conversion rates (mock or API)
+        - Persist user currency preference
+        - Display prices in selected currency throughout
+      </multi_currency>
+
+      <promo_code_ui>
+        - Input field at checkout step
+        - Apply/remove promo code buttons
+        - Discount display in order summary
+        - Validation messages (valid/invalid/expired)
+        - Integration with existing promo_codes table
+      </promo_code_ui>
+
+      <order_tracking>
+        - Dedicated /orders/:id/track page
+        - Status timeline (Ordered → Processing → Activated → Active)
+        - Estimated activation time
+        - Push notification opt-in (mock)
+        - Data usage progress bar (mock)
+      </order_tracking>
+
+      <advanced_search>
+        - Filter by region, data amount, price range, duration
+        - Sort by price, popularity, data amount
+        - Search results page with applied filters
+        - Save search preferences
+      </advanced_search>
+    </high_priority>
+
+    <medium_priority>
+      <user_reviews>
+        - Star rating (1-5) on destinations
+        - Written review submission form
+        - Review display on destination detail page
+        - Helpful/not helpful voting
+        - Filter reviews by rating
+        - Database: reviews table with user_id, destination_id, rating, text
+      </user_reviews>
+
+      <compare_packages>
+        - "Add to compare" button on package cards
+        - Comparison drawer/modal (up to 3 packages)
+        - Side-by-side feature comparison table
+        - Highlight differences
+        - Quick add-to-cart from comparison
+      </compare_packages>
+
+      <data_usage_calculator>
+        - Activity-based estimation tool
+        - Sliders for: streaming hours, social media, maps, email, web browsing
+        - Recommended package based on estimate
+        - Travel duration input
+        - Educational tips on data consumption
+      </data_usage_calculator>
+
+      <live_chat_widget>
+        - Floating chat button
+        - Chat window with message history
+        - Canned responses for common questions
+        - Agent typing indicator (mock)
+        - Offline message form
+      </live_chat_widget>
+    </medium_priority>
+
+    <lower_priority>
+      <referral_program>
+        - Unique referral code per user
+        - Share via email/social buttons
+        - Track referral signups
+        - Credit rewards display
+        - Referral leaderboard (optional)
+      </referral_program>
+
+      <bundle_deals>
+        - Multi-country package builder
+        - Discount for bundled destinations
+        - Popular bundle suggestions
+        - Custom bundle creator
+      </bundle_deals>
+
+      <email_notifications>
+        - Order confirmation email template
+        - eSIM activation reminder
+        - Data usage alerts (mock)
+        - Marketing/promotional emails opt-in
+      </email_notifications>
+
+      <usage_analytics>
+        - User dashboard for data consumption
+        - Daily/weekly usage charts
+        - Remaining data display
+        - Top-up recommendations
+      </usage_analytics>
+    </lower_priority>
+  </planned_features>
+
+  <technical_optimizations>
+    <high_priority>
+      - Extract API URL to environment config (hardcoded in 13+ files)
+      - Add API response caching with SWR or React Query
+      - Fix N+1 query pattern in DestinationDetailPage
+      - Create shared API service layer with error handling
+      - Add input validation and sanitization
+    </high_priority>
+    <medium_priority>
+      - Add rate limiting to API endpoints
+      - Implement CSRF protection
+      - Add search debouncing (300ms)
+      - Lazy load images with blur placeholder
+      - Code splitting for route-based chunks
+    </medium_priority>
+    <lower_priority>
+      - Add service worker for offline support
+      - Implement proper SEO meta tags
+      - Add structured data for rich snippets
+      - Performance monitoring integration
+    </lower_priority>
+  </technical_optimizations>
+
   <database_schema>
     <tables>
       <regions>
