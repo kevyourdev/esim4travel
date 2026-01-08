@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
@@ -84,7 +85,27 @@
         line-height: 1.625;
         background-color: #FFFDF5;
         color: #1E293B;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
+      /* Dark mode styles */
+      html.dark body {
+        background-color: #0F172A;
+        color: #E2E8F0;
+      }
+      html.dark .bg-background { background-color: #0F172A !important; }
+      html.dark .bg-card { background-color: #1E293B !important; }
+      html.dark .bg-muted { background-color: #1E293B !important; }
+      html.dark .bg-input { background-color: #334155 !important; }
+      html.dark .bg-white { background-color: #1E293B !important; }
+      html.dark .text-foreground { color: #E2E8F0 !important; }
+      html.dark .text-mutedForeground { color: #94A3B8 !important; }
+      html.dark .border-border { border-color: #334155 !important; }
+      html.dark .border-foreground { border-color: #475569 !important; }
+      html.dark .shadow-hard { box-shadow: 4px 4px 0px 0px #475569 !important; }
+      html.dark .shadow-hard-sm { box-shadow: 2px 2px 0px 0px #475569 !important; }
+      html.dark .shadow-hard-lg { box-shadow: 6px 6px 0px 0px #475569 !important; }
+      html.dark .shadow-hard-xl { box-shadow: 8px 8px 0px 0px #475569 !important; }
+      html.dark .shadow-hard-muted { box-shadow: 8px 8px 0px 0px #334155 !important; }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Outfit', system-ui, sans-serif;
         line-height: 1.2;

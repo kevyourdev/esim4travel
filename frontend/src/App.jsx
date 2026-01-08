@@ -18,9 +18,11 @@ import AboutPage from './pages/AboutPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
   return (
+    <ThemeProvider>
     <AuthProvider>
       <CartProvider>
         <Router>
@@ -50,6 +52,7 @@ function App() {
         </Router>
       </CartProvider>
     </AuthProvider>
+    </ThemeProvider>
   )
 }
 
