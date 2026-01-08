@@ -1,0 +1,797 @@
+<project_specification>
+  <project_name>eSIM4Travel - Travel eSIM Provider</project_name>
+
+  <overview>
+    Build a fully functional mockup recreation of esim4travel.com - an eSIM provider offering affordable
+    data packages for travelers across 190+ destinations worldwide. The application should provide a
+    modern e-commerce experience for browsing destinations, selecting data plans, and completing purchases.
+    The UI should be clean, travel-inspired, and mobile-first with excellent user experience using
+    Tailwind CSS and React.
+  </overview>
+
+  <technology_stack>
+    <frontend>
+      <framework>React with Vite</framework>
+      <styling>Tailwind CSS (via CDN)</styling>
+      <state_management>React hooks and context</state_management>
+      <routing>React Router for navigation</routing>
+      <icons>Heroicons or Lucide React</icons>
+      <port>Only launch on port {frontend_port}</port>
+    </frontend>
+    <backend>
+      <runtime>Node.js with Express</runtime>
+      <database>SQLite with better-sqlite3</database>
+      <payment>Mock payment processing (no real transactions)</payment>
+    </backend>
+    <communication>
+      <api>RESTful endpoints</api>
+    </communication>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      - Frontend dependencies pre-installed via pnpm
+      - Backend code goes in /server directory
+      - Install backend dependencies as needed
+      - Use mock data for all destinations and packages
+    </environment_setup>
+  </prerequisites>
+
+  <core_features>
+    <homepage>
+      - Hero section with search bar and tagline "Stay Connected Anywhere"
+      - Animated globe or world map background element
+      - Quick destination search with autocomplete
+      - Featured destinations grid (6-8 popular countries)
+      - How it works section (3 steps with icons):
+        1. Choose your destination
+        2. Select a data package
+        3. Scan QR code and connect
+      - Trust indicators section:
+        - 190+ destinations
+        - 2M+ happy travelers
+        - 4.8/5 star rating
+        - 24/7 support
+        - Instant delivery
+      - Customer testimonials carousel
+      - FAQ accordion section
+      - Newsletter signup footer
+    </homepage>
+
+    <destination_browser>
+      - Search input with real-time filtering
+      - Region tabs/filters (Europe, Asia, Americas, Africa, Oceania, Middle East)
+      - Sort options (Popular, A-Z, Price low-high)
+      - Grid of destination cards showing:
+        - Country flag (emoji or image)
+        - Country name
+        - "From $X.XX" starting price
+        - Number of plans available
+        - Coverage quality indicator (bars)
+      - "Regional eSIMs" section for multi-country packages
+      - Load more / infinite scroll pagination
+    </destination_browser>
+
+    <destination_detail_page>
+      - Country header with flag, name, and hero image
+      - Coverage map placeholder
+      - Network partners display (carrier logos)
+      - Data package cards in grid:
+        - Data amount (1GB, 3GB, 5GB, 10GB, Unlimited)
+        - Validity period (7, 15, 30 days)
+        - Price prominently displayed
+        - "Most Popular" badge on recommended plan
+        - Add to cart button
+      - Package comparison table
+      - Coverage details accordion:
+        - Supported networks
+        - Speed (4G/LTE, 5G where available)
+        - Tethering/hotspot support
+        - Voice/SMS (data only disclaimer)
+      - Installation requirements
+      - Destination-specific FAQ
+      - Related destinations suggestions
+    </destination_detail_page>
+
+    <shopping_cart>
+      - Cart icon with item count badge in header
+      - Slide-out cart drawer or dedicated page
+      - Line items showing:
+        - Destination flag and name
+        - Package details (data/validity)
+        - Unit price
+        - Quantity selector
+        - Remove button
+        - Line total
+      - Promo code input with apply button
+      - Order summary:
+        - Subtotal
+        - Discount (if promo applied)
+        - Total
+      - Checkout button
+      - Continue shopping link
+      - Empty cart state with CTA
+    </shopping_cart>
+
+    <checkout_flow>
+      - Progress indicator (Email > Payment > Confirm)
+      - Step 1: Customer Information
+        - Email input (required for eSIM delivery)
+        - Email confirmation input
+        - Marketing opt-in checkbox
+      - Step 2: Payment (mock)
+        - Credit card form (mock validation)
+        - PayPal button (mock)
+        - Apple Pay button (mock)
+        - Secure payment badges
+      - Step 3: Order Review
+        - Order summary
+        - Terms and conditions checkbox
+        - Privacy policy link
+        - Place order button
+      - Confirmation page:
+        - Success message with checkmark
+        - Order number
+        - QR code placeholder (mock)
+        - Installation instructions
+        - Email confirmation notice
+        - Download receipt button
+    </checkout_flow>
+
+    <support_section>
+      - Installation guides with tabs:
+        - iOS installation steps with screenshots
+        - Android installation steps with screenshots
+        - eSIM compatible devices list
+      - Troubleshooting FAQ accordion
+      - Video tutorial placeholders
+      - Live chat widget (mock UI only)
+      - Contact form:
+        - Name, email, order number (optional)
+        - Issue category dropdown
+        - Message textarea
+        - Submit button
+      - Support hours and response time info
+    </support_section>
+
+    <user_account>
+      - Login/Register modal or page
+      - My Orders page:
+        - Order history list
+        - Order status badges
+        - View order details
+        - Re-download QR code
+      - Saved payment methods (mock)
+      - Account settings
+      - Logout functionality
+    </user_account>
+
+    <search_functionality>
+      - Global search in header
+      - Autocomplete suggestions
+      - Search results page
+      - Filter by region
+      - No results state with suggestions
+    </search_functionality>
+
+    <responsive_navigation>
+      - Desktop: Horizontal nav with dropdowns
+      - Mobile: Hamburger menu with slide-out drawer
+      - Sticky header on scroll
+      - Cart icon always visible
+      - Search icon/bar
+    </responsive_navigation>
+  </core_features>
+
+  <database_schema>
+    <tables>
+      <regions>
+        - id, name, slug, description
+        - display_order, is_active
+      </regions>
+
+      <destinations>
+        - id, region_id, name, slug
+        - country_code (ISO), flag_emoji
+        - hero_image_url, description
+        - coverage_quality (1-5)
+        - is_popular, is_active
+        - created_at, updated_at
+      </destinations>
+
+      <packages>
+        - id, destination_id
+        - name, data_amount, data_unit (GB/MB/Unlimited)
+        - validity_days, price_usd
+        - is_popular, is_active
+        - network_type (4G/5G)
+        - tethering_allowed
+        - created_at, updated_at
+      </packages>
+
+      <regional_packages>
+        - id, name, slug, description
+        - countries_included (JSON array)
+        - data_amount, validity_days, price_usd
+        - is_active
+      </regional_packages>
+
+      <customers>
+        - id, email, password_hash
+        - first_name, last_name
+        - created_at, last_login
+      </customers>
+
+      <orders>
+        - id, customer_id, email
+        - status (pending, completed, failed)
+        - subtotal, discount, total
+        - promo_code_used
+        - created_at, updated_at
+      </orders>
+
+      <order_items>
+        - id, order_id, package_id
+        - destination_name, package_name
+        - quantity, unit_price, total_price
+        - qr_code_data (mock)
+      </order_items>
+
+      <promo_codes>
+        - id, code, discount_type (percent/fixed)
+        - discount_value, min_order_amount
+        - usage_limit, times_used
+        - valid_from, valid_until
+        - is_active
+      </promo_codes>
+
+      <testimonials>
+        - id, customer_name, country
+        - rating, review_text
+        - destination_visited
+        - is_featured, created_at
+      </testimonials>
+
+      <faq_items>
+        - id, category, question, answer
+        - display_order, is_active
+      </faq_items>
+
+      <support_tickets>
+        - id, customer_email, order_id
+        - category, subject, message
+        - status, created_at
+      </support_tickets>
+    </tables>
+  </database_schema>
+
+  <api_endpoints_summary>
+    <destinations>
+      - GET /api/destinations (list all, with filters)
+      - GET /api/destinations/popular
+      - GET /api/destinations/search?q=query
+      - GET /api/destinations/:slug
+      - GET /api/destinations/:slug/packages
+    </destinations>
+
+    <regions>
+      - GET /api/regions
+      - GET /api/regions/:slug/destinations
+    </regions>
+
+    <packages>
+      - GET /api/packages/:id
+      - GET /api/regional-packages
+      - GET /api/regional-packages/:slug
+    </packages>
+
+    <cart>
+      - GET /api/cart (session-based)
+      - POST /api/cart/items
+      - PUT /api/cart/items/:id
+      - DELETE /api/cart/items/:id
+      - POST /api/cart/promo-code
+      - DELETE /api/cart/promo-code
+    </cart>
+
+    <checkout>
+      - POST /api/checkout/validate
+      - POST /api/orders
+      - GET /api/orders/:id
+      - GET /api/orders/:id/qr-code
+    </checkout>
+
+    <customers>
+      - POST /api/auth/register
+      - POST /api/auth/login
+      - POST /api/auth/logout
+      - GET /api/auth/me
+      - GET /api/customers/orders
+    </customers>
+
+    <support>
+      - GET /api/faq
+      - GET /api/faq/:category
+      - POST /api/support/tickets
+      - GET /api/installation-guides
+    </support>
+
+    <content>
+      - GET /api/testimonials
+      - GET /api/stats (for trust indicators)
+    </content>
+  </api_endpoints_summary>
+
+  <ui_layout>
+    <main_structure>
+      - Single-column layout with max-width container
+      - Sticky header with navigation
+      - Main content area
+      - Footer with links and info
+      - Mobile-first responsive breakpoints
+    </main_structure>
+
+    <header>
+      - Logo (left)
+      - Main navigation (center on desktop):
+        - Destinations (dropdown with regions)
+        - Regional eSIMs
+        - How It Works
+        - Support
+      - Right side:
+        - Search icon/bar
+        - Cart icon with badge
+        - Account/Login button
+      - Mobile: Logo, hamburger menu, cart
+    </header>
+
+    <footer>
+      - Four columns:
+        - Company (About, Blog, Careers, Press)
+        - Products (All Destinations, Regional, Business)
+        - Support (Help Center, Contact, Installation)
+        - Legal (Terms, Privacy, Refund Policy)
+      - Bottom bar:
+        - Copyright
+        - Social media icons
+        - Payment method icons
+        - Language selector (mock)
+    </footer>
+
+    <homepage_sections>
+      - Hero with search (full-width)
+      - Trust badges bar
+      - Featured destinations grid
+      - How it works (3 columns)
+      - Testimonials carousel
+      - Regional packages highlight
+      - FAQ accordion
+      - Newsletter signup
+    </homepage_sections>
+
+    <destination_page_layout>
+      - Breadcrumb navigation
+      - Country header with flag and image
+      - Two-column on desktop:
+        - Left: Package cards grid
+        - Right: Sticky coverage info sidebar
+      - Full-width comparison table
+      - FAQ section
+      - Related destinations
+    </destination_page_layout>
+
+    <cart_drawer>
+      - Slide-in from right
+      - Header with close button
+      - Scrollable items list
+      - Fixed bottom with totals and checkout
+      - Overlay backdrop
+    </cart_drawer>
+  </ui_layout>
+
+  <design_system>
+    <color_palette>
+      - Primary: Teal (#0D9488)
+      - Primary dark: (#0F766E)
+      - Primary light: (#14B8A6)
+      - Accent: Orange (#F97316)
+      - Accent dark: (#EA580C)
+      - Background: White (#FFFFFF)
+      - Surface: Light gray (#F9FAFB)
+      - Text primary: Dark gray (#111827)
+      - Text secondary: Medium gray (#6B7280)
+      - Border: Light gray (#E5E7EB)
+      - Success: Green (#10B981)
+      - Error: Red (#EF4444)
+      - Warning: Amber (#F59E0B)
+    </color_palette>
+
+    <typography>
+      - Font family: Inter, system-ui, sans-serif
+      - Headings: font-bold
+      - H1: text-4xl md:text-5xl
+      - H2: text-3xl md:text-4xl
+      - H3: text-2xl
+      - Body: text-base (16px)
+      - Small: text-sm (14px)
+      - Line height: relaxed for body text
+    </typography>
+
+    <components>
+      <destination_card>
+        - White background with subtle shadow
+        - Rounded corners (rounded-xl)
+        - Flag and country name header
+        - "From $X.XX" price
+        - Hover: shadow increase, slight scale
+        - Click: navigate to destination
+      </destination_card>
+
+      <package_card>
+        - Border with rounded corners
+        - Data amount large and bold
+        - Validity period below
+        - Price prominent
+        - "Most Popular" badge (orange)
+        - Add to cart button (teal)
+        - Selected state: teal border
+      </package_card>
+
+      <buttons>
+        - Primary: bg-teal-600, white text, rounded-lg
+        - Secondary: border-teal-600, teal text
+        - Accent: bg-orange-500, white text
+        - Disabled: bg-gray-300, cursor-not-allowed
+        - Hover states with darker shade
+        - Padding: px-6 py-3
+      </buttons>
+
+      <inputs>
+        - Rounded borders (rounded-lg)
+        - Focus ring in teal
+        - Placeholder text gray
+        - Error state: red border, error message
+        - Label above input
+      </inputs>
+
+      <badges>
+        - Popular: bg-orange-500, white text
+        - Coverage: colored bars indicator
+        - Status: colored pills
+        - Region: outline style
+      </badges>
+
+      <trust_indicators>
+        - Icon + number + label
+        - Horizontal row on desktop
+        - Grid on mobile
+        - Subtle background
+      </trust_indicators>
+    </components>
+
+    <animations>
+      - Transitions: 150-200ms ease
+      - Card hover: scale 1.02, shadow increase
+      - Button hover: background darken
+      - Cart drawer: slide in from right
+      - Modal: fade in with scale
+      - Page transitions: subtle fade
+      - Loading: spinner or skeleton
+    </animations>
+
+    <spacing>
+      - Container max-width: 1280px
+      - Section padding: py-16 md:py-24
+      - Card padding: p-4 md:p-6
+      - Grid gaps: gap-4 md:gap-6
+      - Consistent margin scale
+    </spacing>
+  </design_system>
+
+  <sample_data>
+    <regions>
+      - Europe (39 countries)
+      - Asia Pacific (25 countries)
+      - North America (3 countries)
+      - South America (12 countries)
+      - Africa (30 countries)
+      - Middle East (15 countries)
+      - Oceania (5 countries)
+    </regions>
+
+    <popular_destinations>
+      <destination name="United States">
+        - 1GB / 7 days: $4.99
+        - 3GB / 15 days: $9.99
+        - 5GB / 30 days: $14.99
+        - 10GB / 30 days: $24.99
+        - Unlimited / 30 days: $39.99
+      </destination>
+      <destination name="Japan">
+        - 1GB / 7 days: $5.99
+        - 3GB / 15 days: $12.99
+        - 5GB / 30 days: $19.99
+        - 10GB / 30 days: $34.99
+        - Unlimited / 30 days: $54.99
+      </destination>
+      <destination name="United Kingdom">
+        - 1GB / 7 days: $4.99
+        - 3GB / 15 days: $10.99
+        - 5GB / 30 days: $16.99
+        - 10GB / 30 days: $27.99
+      </destination>
+      <destination name="Thailand">
+        - 1GB / 7 days: $3.99
+        - 3GB / 15 days: $8.99
+        - 5GB / 30 days: $13.99
+        - 10GB / 30 days: $22.99
+      </destination>
+      <destination name="France">
+        - 1GB / 7 days: $4.99
+        - 3GB / 15 days: $11.99
+        - 5GB / 30 days: $17.99
+        - 10GB / 30 days: $29.99
+      </destination>
+      <destination name="Australia">
+        - 1GB / 7 days: $5.99
+        - 3GB / 15 days: $13.99
+        - 5GB / 30 days: $21.99
+        - 10GB / 30 days: $36.99
+      </destination>
+      <destination name="Germany">
+        - 1GB / 7 days: $4.99
+        - 3GB / 15 days: $11.99
+        - 5GB / 30 days: $17.99
+        - 10GB / 30 days: $29.99
+      </destination>
+      <destination name="South Korea">
+        - 1GB / 7 days: $5.99
+        - 3GB / 15 days: $12.99
+        - 5GB / 30 days: $19.99
+        - 10GB / 30 days: $32.99
+      </destination>
+    </popular_destinations>
+
+    <regional_packages>
+      <package name="Europe 39">
+        - Covers: All EU + UK, Switzerland, Norway
+        - 3GB / 15 days: $12.99
+        - 5GB / 30 days: $19.99
+        - 10GB / 30 days: $29.99
+        - Unlimited / 30 days: $49.99
+      </package>
+      <package name="Asia 15">
+        - Covers: Japan, Korea, Thailand, Singapore, etc.
+        - 3GB / 15 days: $14.99
+        - 5GB / 30 days: $24.99
+        - 10GB / 30 days: $39.99
+      </package>
+    </regional_packages>
+
+    <testimonials>
+      <testimonial>
+        - Name: Sarah M.
+        - Country: Canada
+        - Rating: 5
+        - Text: "Used this in Japan for 2 weeks. Flawless connection everywhere I went!"
+      </testimonial>
+      <testimonial>
+        - Name: James L.
+        - Country: UK
+        - Rating: 5
+        - Text: "So much easier than getting a local SIM. Set up in 5 minutes at the airport."
+      </testimonial>
+      <testimonial>
+        - Name: Maria G.
+        - Country: Spain
+        - Rating: 5
+        - Text: "Great prices and excellent coverage across Europe. Highly recommend!"
+      </testimonial>
+    </testimonials>
+
+    <promo_codes>
+      - WELCOME10: 10% off first order
+      - TRAVEL20: $5 off orders over $25
+      - SUMMER2024: 15% off (expired - for testing)
+    </promo_codes>
+
+    <faq_items>
+      - What is an eSIM?
+      - Which devices support eSIM?
+      - How do I install the eSIM?
+      - Can I use my regular number alongside eSIM?
+      - What happens when I run out of data?
+      - Do you offer refunds?
+      - Can I share my data (tethering)?
+      - How fast is the connection?
+    </faq_items>
+  </sample_data>
+
+  <key_interactions>
+    <search_flow>
+      1. User clicks search or types in hero search
+      2. Autocomplete shows matching destinations
+      3. User selects destination
+      4. Navigate to destination detail page
+    </search_flow>
+
+    <purchase_flow>
+      1. User browses destinations or searches
+      2. Clicks on destination card
+      3. Views available packages
+      4. Clicks "Add to Cart" on desired package
+      5. Cart drawer slides open
+      6. User adjusts quantity if needed
+      7. Optionally applies promo code
+      8. Clicks "Checkout"
+      9. Enters email address
+      10. Selects payment method (mock)
+      11. Reviews order and accepts terms
+      12. Clicks "Place Order"
+      13. Sees confirmation with QR code
+    </purchase_flow>
+
+    <cart_management>
+      1. Add item: Cart drawer opens, item added
+      2. Update quantity: Inline +/- buttons
+      3. Remove item: Click X, confirm removal
+      4. Apply promo: Enter code, see discount
+      5. Proceed to checkout: Click button
+    </cart_management>
+
+    <support_flow>
+      1. User clicks Support in nav
+      2. Views installation guides by device
+      3. Browses FAQ by category
+      4. If needed, opens contact form
+      5. Submits support request
+      6. Sees confirmation message
+    </support_flow>
+  </key_interactions>
+
+  <implementation_steps>
+    <step number="1">
+      <title>Project Setup and Database</title>
+      <tasks>
+        - Initialize Express server
+        - Set up SQLite database with better-sqlite3
+        - Create database schema and migrations
+        - Seed database with sample data
+        - Set up CORS and middleware
+        - Create health check endpoint
+      </tasks>
+    </step>
+
+    <step number="2">
+      <title>Core API Endpoints</title>
+      <tasks>
+        - Implement destinations endpoints
+        - Implement regions endpoints
+        - Implement packages endpoints
+        - Implement search functionality
+        - Add filtering and sorting
+      </tasks>
+    </step>
+
+    <step number="3">
+      <title>Homepage and Navigation</title>
+      <tasks>
+        - Create responsive header with navigation
+        - Build hero section with search
+        - Implement featured destinations grid
+        - Create "How it Works" section
+        - Build trust indicators component
+        - Add testimonials carousel
+        - Create footer
+      </tasks>
+    </step>
+
+    <step number="4">
+      <title>Destination Browser</title>
+      <tasks>
+        - Build destination list page
+        - Implement region filtering tabs
+        - Create destination cards
+        - Add search with autocomplete
+        - Implement sort options
+        - Add pagination or load more
+      </tasks>
+    </step>
+
+    <step number="5">
+      <title>Destination Detail Page</title>
+      <tasks>
+        - Create country header component
+        - Build package cards grid
+        - Implement package selection
+        - Add comparison table
+        - Create coverage info sidebar
+        - Build FAQ accordion
+        - Add related destinations
+      </tasks>
+    </step>
+
+    <step number="6">
+      <title>Shopping Cart</title>
+      <tasks>
+        - Implement cart state management
+        - Create cart API endpoints
+        - Build cart drawer component
+        - Add quantity controls
+        - Implement promo code functionality
+        - Create empty cart state
+      </tasks>
+    </step>
+
+    <step number="7">
+      <title>Checkout Flow</title>
+      <tasks>
+        - Create multi-step checkout form
+        - Build email input step
+        - Create mock payment forms
+        - Implement order creation
+        - Build confirmation page
+        - Generate mock QR code display
+      </tasks>
+    </step>
+
+    <step number="8">
+      <title>Support Section</title>
+      <tasks>
+        - Create installation guides pages
+        - Build FAQ page with categories
+        - Implement contact form
+        - Create support ticket API
+        - Add mock live chat widget
+      </tasks>
+    </step>
+
+    <step number="9">
+      <title>Polish and Optimization</title>
+      <tasks>
+        - Optimize mobile responsiveness
+        - Add loading states and skeletons
+        - Implement error handling
+        - Add form validation
+        - Test all user flows
+        - Performance optimization
+      </tasks>
+    </step>
+  </implementation_steps>
+
+  <success_criteria>
+    <functionality>
+      - Destination browsing and search works smoothly
+      - Package selection is intuitive
+      - Cart management is reliable
+      - Checkout flow completes successfully
+      - All mock features function correctly
+    </functionality>
+
+    <user_experience>
+      - Clean, modern travel-inspired design
+      - Mobile-first responsive on all devices
+      - Fast load times and interactions
+      - Clear pricing and package information
+      - Trust-building elements visible
+      - Intuitive navigation
+    </user_experience>
+
+    <technical_quality>
+      - Clean, maintainable code structure
+      - Proper error handling
+      - Form validation throughout
+      - Optimized database queries
+      - RESTful API design
+    </technical_quality>
+
+    <design_polish>
+      - Consistent color scheme (teal/orange)
+      - Professional typography
+      - Smooth animations
+      - Country flags displayed correctly
+      - Trust badges and security indicators
+      - Mobile navigation works seamlessly
+    </design_polish>
+  </success_criteria>
+</project_specification>

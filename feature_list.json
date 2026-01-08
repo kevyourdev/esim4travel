@@ -1,0 +1,398 @@
+[
+  {
+    "id": 1,
+    "category": "design-tokens",
+    "description": "Create centralized design tokens file with Playful Geometric color palette (background: #FFFDF5, accent: #8B5CF6, secondary: #F472B6, tertiary: #FBBF24, quaternary: #34D399)",
+    "passes": true
+  },
+  {
+    "id": 2,
+    "category": "design-tokens",
+    "description": "Configure Tailwind with custom colors, shadows, and border-radius tokens from design system",
+    "passes": true
+  },
+  {
+    "id": 3,
+    "category": "typography",
+    "description": "Import and configure Outfit font for headings and Plus Jakarta Sans for body text",
+    "passes": true
+  },
+  {
+    "id": 4,
+    "category": "typography",
+    "description": "Apply typography scale (1.25 ratio) across all headings with correct weights (700-800)",
+    "passes": true
+  },
+  {
+    "id": 5,
+    "category": "global-styles",
+    "description": "Update body background to warm cream (#FFFDF5) and text to slate-800 (#1E293B)",
+    "passes": true
+  },
+  {
+    "id": 6,
+    "category": "shadows",
+    "description": "Implement hard shadow utility classes (4px 4px 0px, 6px 6px 0px, 8px 8px 0px) with no blur",
+    "passes": true
+  },
+  {
+    "id": 7,
+    "category": "animations",
+    "description": "Add bouncy transition timing function ease-[cubic-bezier(0.34,1.56,0.64,1)] for hover effects",
+    "passes": true
+  },
+  {
+    "id": 8,
+    "category": "animations",
+    "description": "Implement wiggle keyframe animation for icon hover states",
+    "passes": true
+  },
+  {
+    "id": 9,
+    "category": "buttons",
+    "description": "Restyle primary buttons as 'Candy Buttons' with pill shape, 2px dark border, hard shadow, and hover lift effect",
+    "passes": true
+  },
+  {
+    "id": 10,
+    "category": "buttons",
+    "description": "Restyle secondary buttons with transparent bg, dark border, and yellow fill on hover",
+    "passes": true
+  },
+  {
+    "id": 11,
+    "category": "buttons",
+    "description": "Add active state animation (translate + shadow shrink) to all buttons",
+    "passes": true
+  },
+  {
+    "id": 12,
+    "category": "cards",
+    "description": "Restyle destination cards as 'Sticker Cards' with 2px dark border, rounded-xl, and hard shadow",
+    "passes": true
+  },
+  {
+    "id": 13,
+    "category": "cards",
+    "description": "Add hover wiggle effect (rotate -1deg, scale 1.02) to all cards",
+    "passes": true
+  },
+  {
+    "id": 14,
+    "category": "cards",
+    "description": "Style featured/popular cards with pink hard shadow (#F472B6)",
+    "passes": true
+  },
+  {
+    "id": 15,
+    "category": "inputs",
+    "description": "Restyle form inputs with 2px border, rounded-lg, and colored hard shadow on focus",
+    "passes": true
+  },
+  {
+    "id": 16,
+    "category": "inputs",
+    "description": "Style input labels as bold, uppercase, small with tracking-wide",
+    "passes": true
+  },
+  {
+    "id": 17,
+    "category": "header",
+    "description": "Restyle header with warm cream background, hard shadow bottom border effect",
+    "passes": true
+  },
+  {
+    "id": 18,
+    "category": "header",
+    "description": "Style cart icon inside a colored circle with item count badge",
+    "passes": true
+  },
+  {
+    "id": 19,
+    "category": "header",
+    "description": "Apply bouncy hover transitions to navigation links",
+    "passes": true
+  },
+  {
+    "id": 20,
+    "category": "footer",
+    "description": "Restyle footer with design system colors and playful decorative elements",
+    "passes": true
+  },
+  {
+    "id": 21,
+    "category": "hero",
+    "description": "Add large yellow circle (#FBBF24) as decorative element behind hero text",
+    "passes": true
+  },
+  {
+    "id": 22,
+    "category": "hero",
+    "description": "Add dotted pattern background behind hero image area",
+    "passes": true
+  },
+  {
+    "id": 23,
+    "category": "hero",
+    "description": "Style hero CTA as prominent Candy Button with arrow icon in white circle",
+    "passes": true
+  },
+  {
+    "id": 24,
+    "category": "hero",
+    "description": "Apply blob mask or creative border-radius to hero image",
+    "passes": true
+  },
+  {
+    "id": 25,
+    "category": "search",
+    "description": "Restyle search input with chunky border and hard shadow focus state",
+    "passes": true
+  },
+  {
+    "id": 26,
+    "category": "search",
+    "description": "Style search autocomplete dropdown as sticker card with items having hover effects",
+    "passes": true
+  },
+  {
+    "id": 27,
+    "category": "features-section",
+    "description": "Restyle 'How it Works' section with alternating colored card headers (violet, pink, yellow)",
+    "passes": true
+  },
+  {
+    "id": 28,
+    "category": "features-section",
+    "description": "Add dashed SVG connecting lines between feature step cards",
+    "passes": true
+  },
+  {
+    "id": 29,
+    "category": "features-section",
+    "description": "Style feature icons inside colored circles with white icons",
+    "passes": true
+  },
+  {
+    "id": 30,
+    "category": "trust-indicators",
+    "description": "Restyle trust indicator stats with playful typography and confetti decorations",
+    "passes": true
+  },
+  {
+    "id": 31,
+    "category": "testimonials",
+    "description": "Restyle testimonial cards with speech bubble border-radius style",
+    "passes": true
+  },
+  {
+    "id": 32,
+    "category": "testimonials",
+    "description": "Add quotation mark decorative elements in accent colors",
+    "passes": true
+  },
+  {
+    "id": 33,
+    "category": "faq",
+    "description": "Restyle FAQ accordion with hard shadow cards and bouncy expand/collapse animation",
+    "passes": true
+  },
+  {
+    "id": 34,
+    "category": "faq",
+    "description": "Style FAQ toggle icons inside colored circles with rotation animation",
+    "passes": true
+  },
+  {
+    "id": 35,
+    "category": "destinations-page",
+    "description": "Restyle region filter tabs with pill shape and active state hard shadow",
+    "passes": true
+  },
+  {
+    "id": 36,
+    "category": "destinations-page",
+    "description": "Style sort dropdown with design system inputs styling",
+    "passes": true
+  },
+  {
+    "id": 37,
+    "category": "destinations-page",
+    "description": "Add confetti/shape decorations to destinations page background",
+    "passes": true
+  },
+  {
+    "id": 38,
+    "category": "destination-detail",
+    "description": "Restyle destination hero with large decorative shapes and blob-masked image",
+    "passes": true
+  },
+  {
+    "id": 39,
+    "category": "destination-detail",
+    "description": "Style breadcrumb navigation with playful separator icons",
+    "passes": true
+  },
+  {
+    "id": 40,
+    "category": "package-cards",
+    "description": "Restyle eSIM package cards as sticker cards with hard shadows",
+    "passes": true
+  },
+  {
+    "id": 41,
+    "category": "package-cards",
+    "description": "Add rotated yellow star badge for 'Most Popular' packages",
+    "passes": true
+  },
+  {
+    "id": 42,
+    "category": "package-cards",
+    "description": "Style package feature checkmarks inside green circles",
+    "passes": true
+  },
+  {
+    "id": 43,
+    "category": "comparison-table",
+    "description": "Restyle comparison table with chunky borders and alternating row highlights",
+    "passes": true
+  },
+  {
+    "id": 44,
+    "category": "cart-drawer",
+    "description": "Restyle cart drawer with design system colors and hard shadow border",
+    "passes": true
+  },
+  {
+    "id": 45,
+    "category": "cart-drawer",
+    "description": "Style cart item cards with sticker effect and remove button with hover animation",
+    "passes": true
+  },
+  {
+    "id": 46,
+    "category": "cart-drawer",
+    "description": "Restyle quantity controls as chunky pill buttons with hard shadows",
+    "passes": true
+  },
+  {
+    "id": 47,
+    "category": "cart-drawer",
+    "description": "Style promo code input and apply button with design system styling",
+    "passes": true
+  },
+  {
+    "id": 48,
+    "category": "checkout",
+    "description": "Restyle checkout progress indicator with playful step circles and connecting lines",
+    "passes": true
+  },
+  {
+    "id": 49,
+    "category": "checkout",
+    "description": "Style checkout form sections as sticker cards with headers",
+    "passes": true
+  },
+  {
+    "id": 50,
+    "category": "checkout",
+    "description": "Restyle order summary sidebar with design system styling",
+    "passes": true
+  },
+  {
+    "id": 51,
+    "category": "confirmation",
+    "description": "Style order confirmation page with celebratory confetti elements",
+    "passes": true
+  },
+  {
+    "id": 52,
+    "category": "confirmation",
+    "description": "Add success checkmark inside large green circle with bounce animation",
+    "passes": true
+  },
+  {
+    "id": 53,
+    "category": "icons",
+    "description": "Update all Lucide icons to use strokeWidth 2.5 and round caps/joins",
+    "passes": true
+  },
+  {
+    "id": 54,
+    "category": "icons",
+    "description": "Wrap all standalone icons in colored circle backgrounds",
+    "passes": true
+  },
+  {
+    "id": 55,
+    "category": "decorations",
+    "description": "Add squiggle SVG section dividers between major sections",
+    "passes": true
+  },
+  {
+    "id": 56,
+    "category": "decorations",
+    "description": "Create and add floating shape components (circles, triangles, squares) as background decorations",
+    "passes": true
+  },
+  {
+    "id": 57,
+    "category": "decorations",
+    "description": "Add dot grid pattern to at least one section background",
+    "passes": true
+  },
+  {
+    "id": 58,
+    "category": "responsive",
+    "description": "Reduce hard shadows to 2px on mobile for space optimization",
+    "passes": true
+  },
+  {
+    "id": 59,
+    "category": "responsive",
+    "description": "Hide complex background decorations on mobile to prevent text overlap",
+    "passes": true
+  },
+  {
+    "id": 60,
+    "category": "responsive",
+    "description": "Ensure all buttons maintain 48px minimum height on mobile for touch targets",
+    "passes": true
+  },
+  {
+    "id": 61,
+    "category": "accessibility",
+    "description": "Implement prefers-reduced-motion media query to disable bouncy/wiggle animations",
+    "passes": true
+  },
+  {
+    "id": 62,
+    "category": "accessibility",
+    "description": "Ensure focus states have thick colored border + hard shadow for visibility",
+    "passes": true
+  },
+  {
+    "id": 63,
+    "category": "accessibility",
+    "description": "Verify AAA contrast ratio for all text on warm cream background",
+    "passes": true
+  },
+  {
+    "id": 64,
+    "category": "polish",
+    "description": "Add entrance pop animation (scale 0->1 with bounce) to page load elements",
+    "passes": true
+  },
+  {
+    "id": 65,
+    "category": "polish",
+    "description": "Implement marquee scrolling effect for trust indicators or partner logos",
+    "passes": true
+  },
+  {
+    "id": 66,
+    "category": "polish",
+    "description": "Final visual QA - ensure consistent spacing, alignment, and design token usage across all pages",
+    "passes": true
+  }
+]

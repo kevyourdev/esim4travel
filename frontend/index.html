@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eSIM4Travel - Stay Connected Anywhere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: '#FFFDF5',
+              foreground: '#1E293B',
+              muted: '#F1F5F9',
+              mutedForeground: '#64748B',
+              accent: '#8B5CF6',
+              accentForeground: '#FFFFFF',
+              secondary: '#F472B6',
+              tertiary: '#FBBF24',
+              quaternary: '#34D399',
+              border: '#E2E8F0',
+              input: '#FFFFFF',
+              card: '#FFFFFF',
+              ring: '#8B5CF6',
+              primary: {
+                DEFAULT: '#8B5CF6',
+                dark: '#7C3AED',
+                light: '#A78BFA',
+              }
+            },
+            fontFamily: {
+              heading: ['Outfit', 'system-ui', 'sans-serif'],
+              body: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            },
+            borderRadius: {
+              'sm': '8px',
+              'md': '16px',
+              'lg': '24px',
+            },
+            borderWidth: {
+              DEFAULT: '2px',
+            },
+            boxShadow: {
+              'hard': '4px 4px 0px 0px #1E293B',
+              'hard-sm': '2px 2px 0px 0px #1E293B',
+              'hard-lg': '6px 6px 0px 0px #1E293B',
+              'hard-xl': '8px 8px 0px 0px #1E293B',
+              'hard-accent': '4px 4px 0px 0px #8B5CF6',
+              'hard-secondary': '8px 8px 0px 0px #F472B6',
+              'hard-tertiary': '8px 8px 0px 0px #FBBF24',
+              'hard-muted': '8px 8px 0px 0px #E2E8F0',
+            },
+            keyframes: {
+              wiggle: {
+                '0%, 100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(3deg)' },
+                '75%': { transform: 'rotate(-3deg)' },
+              },
+              pop: {
+                '0%': { transform: 'scale(0)' },
+                '50%': { transform: 'scale(1.1)' },
+                '100%': { transform: 'scale(1)' },
+              }
+            },
+            animation: {
+              wiggle: 'wiggle 0.5s ease-in-out',
+              pop: 'pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            },
+            transitionTimingFunction: {
+              'bouncy': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        line-height: 1.625;
+        background-color: #FFFDF5;
+        color: #1E293B;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', system-ui, sans-serif;
+        line-height: 1.2;
+      }
+      /* Typography Scale - 1.25 ratio (Major Third) */
+      h1 {
+        font-size: 3.052rem;
+        font-weight: 800;
+      }
+      h2 {
+        font-size: 2.441rem;
+        font-weight: 800;
+      }
+      h3 {
+        font-size: 1.953rem;
+        font-weight: 700;
+      }
+      h4 {
+        font-size: 1.563rem;
+        font-weight: 700;
+      }
+      h5 {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+      h6 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Mobile Responsive Optimizations */
+      @media (max-width: 768px) {
+        /* Reduce hard shadows to 2px on mobile for space optimization */
+        .shadow-hard {
+          box-shadow: 2px 2px 0px 0px #1E293B !important;
+        }
+        .shadow-hard-lg {
+          box-shadow: 2px 2px 0px 0px #1E293B !important;
+        }
+        .shadow-hard-xl {
+          box-shadow: 2px 2px 0px 0px #1E293B !important;
+        }
+        .shadow-hard-accent {
+          box-shadow: 2px 2px 0px 0px #8B5CF6 !important;
+        }
+        .shadow-hard-secondary {
+          box-shadow: 2px 2px 0px 0px #F472B6 !important;
+        }
+        .shadow-hard-tertiary {
+          box-shadow: 2px 2px 0px 0px #FBBF24 !important;
+        }
+        .shadow-hard-muted {
+          box-shadow: 2px 2px 0px 0px #E2E8F0 !important;
+        }
+        /* Inline hard shadows */
+        [style*="shadow"] [class*="shadow-["] {
+          box-shadow: 2px 2px 0px 0px currentColor !important;
+        }
+
+        /* Ensure all buttons maintain 48px minimum height for touch targets */
+        button,
+        a[class*="btn"],
+        [role="button"],
+        input[type="button"],
+        input[type="submit"] {
+          min-height: 48px !important;
+        }
+      }
+
+      /* Focus states with thick border and hard shadow for accessibility */
+      *:focus-visible {
+        outline: none;
+        border-color: #8B5CF6 !important;
+        box-shadow: 4px 4px 0px 0px #8B5CF6 !important;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #8B5CF6;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
