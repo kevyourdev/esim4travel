@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useRecentlyViewed } from '../context/RecentlyViewedContext'
 
 const API_URL = 'http://localhost:3001/api'
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const { recentlyViewed, clearRecentlyViewed } = useRecentlyViewed()
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [showResults, setShowResults] = useState(false)
@@ -503,6 +505,44 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Recently Viewed Destinations */}
+      {recentlyViewed.length > 0 && (
+        <section className="py-12 lg:py-16 bg-background border-t-2 border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h2 className="text-2xl lg:text-3xl font-heading font-extrabold text-foreground">Recently Viewed</h2>
+                <p className="text-mutedForeground mt-1 font-medium">Continue where you left off</p>
+              </div>
+              <button
+                onClick={clearRecentlyViewed}
+                className="text-secondary hover:text-secondary/80 font-semibold transition-colors text-sm"
+              >
+                Clear History
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+              {recentlyViewed.slice(0, 6).map((dest) => (
+                <Link
+                  key={dest.id}
+                  to={`/destinations/${dest.slug}`}
+                  className="bg-card rounded-xl border-2 border-foreground shadow-hard hover:-rotate-1 hover:scale-105 transition-all duration-300 ease-bouncy overflow-hidden group"
+                >
+                  <div className="h-20 bg-gradient-to-br from-quaternary/30 to-accent/30 flex items-center justify-center">
+                    <span className="text-4xl group-hover:animate-wiggle">{dest.flag_emoji}</span>
+                  </div>
+                  <div className="p-3">
+                    <h3 className="font-heading font-bold text-sm text-foreground truncate">{dest.name}</h3>
+                    <span className="text-accent font-bold text-sm">From ${dest.min_price?.toFixed(2) || 'N/A'}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Testimonials */}
       <section className="py-16 lg:py-24 bg-background relative overflow-hidden">

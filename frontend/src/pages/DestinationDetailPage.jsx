@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useRecentlyViewed } from '../context/RecentlyViewedContext'
 
 export default function DestinationDetailPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
   const { addToCart } = useCart()
+  const { addToRecentlyViewed } = useRecentlyViewed()
   const [destination, setDestination] = useState(null)
   const [packages, setPackages] = useState([])
   const [relatedDestinations, setRelatedDestinations] = useState([])
@@ -28,6 +30,9 @@ export default function DestinationDetailPage() {
         }
         const destData = await destResponse.json()
         setDestination(destData)
+
+        // Add to recently viewed
+        addToRecentlyViewed(destData)
 
         // Fetch packages for this destination
         const pkgsResponse = await fetch(`http://localhost:3001/api/destinations/${slug}/packages`, {

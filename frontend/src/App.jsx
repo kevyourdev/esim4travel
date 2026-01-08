@@ -21,11 +21,13 @@ import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import { WishlistProvider } from './context/WishlistContext'
+import { RecentlyViewedProvider } from './context/RecentlyViewedContext'
 
 function App() {
   return (
     <ThemeProvider>
     <WishlistProvider>
+    <RecentlyViewedProvider>
     <AuthProvider>
       <CartProvider>
         <Router>
@@ -56,6 +58,7 @@ function App() {
         </Router>
       </CartProvider>
     </AuthProvider>
+    </RecentlyViewedProvider>
     </WishlistProvider>
     </ThemeProvider>
   )
