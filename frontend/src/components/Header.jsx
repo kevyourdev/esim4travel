@@ -6,11 +6,13 @@ import { useTheme } from '../context/ThemeContext'
 import { useWishlist } from '../context/WishlistContext'
 import CartDrawer from './CartDrawer'
 import LoginModal from './LoginModal'
+import DeviceCompatibilityChecker from './DeviceCompatibilityChecker'
 
 export default function Header() {
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isDeviceCheckerOpen, setIsDeviceCheckerOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -143,6 +145,17 @@ export default function Header() {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-4">
+              {/* Device Checker */}
+              <button
+                onClick={() => setIsDeviceCheckerOpen(true)}
+                className="hidden md:flex w-10 h-10 rounded-full bg-accent/20 border-2 border-foreground items-center justify-center hover:animate-wiggle shadow-hard-sm transition-all focus:outline-none focus:ring-2 focus:ring-ring"
+                title="Check device compatibility"
+              >
+                <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
@@ -318,6 +331,18 @@ export default function Header() {
                 </svg>
                 Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
               </Link>
+              <button
+                onClick={() => {
+                  setIsDeviceCheckerOpen(true)
+                  setIsMobileMenuOpen(false)
+                }}
+                className="block w-full text-left text-gray-700 hover:text-primary font-medium py-2 flex items-center gap-2"
+              >
+                <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                Check Device Compatibility
+              </button>
               {user ? (
                 <>
                   <Link
@@ -362,6 +387,7 @@ export default function Header() {
 
       <CartDrawer />
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+      <DeviceCompatibilityChecker isOpen={isDeviceCheckerOpen} onClose={() => setIsDeviceCheckerOpen(false)} />
 
       {/* Search Modal */}
       {isSearchOpen && (
